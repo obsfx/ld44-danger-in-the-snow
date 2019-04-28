@@ -1,11 +1,8 @@
-let MovingUnit = function (row, col, sprite, type) {
+let MovingUnit = function (row, col, sprite) {
     this.row = row;
     this.col = col;
-    this.type = type;
 
     this.isAvailable = false;
-    
-    console.log(roomCreator);
     roomCreator.tileMap[this.row][this.col].containsUnit = this.type;
     
     Phaser.Sprite.call(this, game, this.col * CellSize, this.row * CellSize, sprite);
@@ -35,6 +32,6 @@ MovingUnit.prototype.setPos = function(row, col, fn) {
     this.isAvailable = false;
 
     game.add.tween(this)
-        .to({x: x, y: y}, 500, Phaser.Easing.Sinusoidal.InOut, true)
+        .to({x: x, y: y}, 200, Phaser.Easing.Sinusoidal.InOut, true)
         .onComplete.add(fn, this)
 }
