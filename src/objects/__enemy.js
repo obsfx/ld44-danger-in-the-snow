@@ -1,6 +1,9 @@
 let Enemy = function (row, col) {
     MovingUnit.call(this, row, col, "enemy1", def.unit.enemy);
     this.frame = 0;
+    this.dmg = 10;
+    this.hp = 40;
+    this.soul = 20;
 }
 
 Enemy.prototype = Object.create(MovingUnit.prototype);
@@ -40,10 +43,13 @@ Enemy.prototype._update = function(fn) {
             let shortestWay = this.findShortestWay(availableDirections);
             let attackDir = attackableDirections[Math.floor(Math.random() * attackableDirections.length)];
 
-            let choice = (Math.random() > 0.3) ? "attack" : "move";
+            let choice = (Math.random() > 0.2) ? "attack" : "move";
             
             if (choice == "move") this.setPos(shortestWay.row, shortestWay.col, fn);
-            else this.attack(attackDir, fn);
+            else {
+                _gameManager.player.damageTaken(this.dmg);
+                this.attack(attackDir, fn);
+            }
 
         } else if (availableDirections.length > 0) {
             let shortestWay = this.findShortestWay(availableDirections);
@@ -92,5 +98,17 @@ Enemy.prototype.checkTile = function(row, col) {
         }
     } else {
         return {isAvailable: false}
+    }
+}
+
+Enemy.prototype.damageTaken = function(dmg, index) {
+    game.camera.flash(0xffffff, 80);
+    this.hp -= dmg;
+    console.log(dmg, this.hp, "AAAAAAAAAA");
+    if (this.hp < 1) {
+        roomCreator.tileMap[this.row][this.col].containsUnit = false;
+        _gameManager.player.soulTaken(this.soul);
+        this.kill();
+        _gameManager.enemies.splice(index, 1);
     }
 }

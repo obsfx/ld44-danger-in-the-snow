@@ -7,6 +7,8 @@ const TotalROW = 10;
 
 const outherTreeSpriteCount = 5;
 const floorSpriteCount = 5;
+const floorE_SpriteCount = 4;
+const blockSpriteCount = 3;
 
 const Screen = {
     Width: TotalCOL * CellSize,
@@ -36,6 +38,22 @@ for (let i = 1; i < floorSpriteCount + 1; i++) {
         type: "image", 
         key: `f${i}`,
         path: `${AssetsDir}/floors/f${i}.png`
+    });
+}
+
+for (let i = 1; i < floorE_SpriteCount + 1; i++) {
+    AssetsPath.Preloads.push({
+        type: "image", 
+        key: `e${i}`,
+        path: `${AssetsDir}/floorsDec/e${i}.png`
+    });
+}
+
+for (let i = 1; i < blockSpriteCount + 1; i++) {
+    AssetsPath.Preloads.push({
+        type: "image", 
+        key: `b${i}`,
+        path: `${AssetsDir}/blocks/b${i}.png`
     });
 }
 

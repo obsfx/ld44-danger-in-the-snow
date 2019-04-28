@@ -8,14 +8,27 @@ let def = {
 let roomCreator;
 let _gameManager;
 
+let ui;
+let soulLabel;
+let playerDamageLabel;
+let turnLabel;
+
 let MainState = {
     
     create: function() {
-        roomCreator = new roomGenerator(TotalROW, TotalCOL);
+        ui = new UI();
+        game.stage.backgroundColor = "#F8F8F8";
+
+        turnLabel = ui.createStageText(`Your Turn`, CellSize / 2, (TotalROW - 2) * CellSize, 36);
+
+        roomCreator = new roomGenerator(TotalROW - 2, TotalCOL - Math.floor(Math.random() * 5));
         roomCreator.generate();
 
         _gameManager = new gameManager();
-        _gameManager.generateEnemies(5);
+        _gameManager.generateEnemies(4);
+
+        soulLabel = ui.createStageText(`Souls: ${_gameManager.player.soul}`, CellSize / 2, (TotalROW - 2) * CellSize + CellSize / 2 + 20, 32);
+        playerDamageLabel = ui.createStageText(`Your Damage: ${_gameManager.player.damage}`, CellSize / 2, (TotalROW - 2) * CellSize + CellSize + 20, 32);
     },
 
     update: function() {

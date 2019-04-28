@@ -7,7 +7,9 @@ function gameManager() {
 
     this.currentState = null
 
-    this.player = new Player(3, 3);
+    roomCreator.reCalculateAvailablePositions();
+    let rPos = roomCreator.availablePositions[Math.floor(Math.random() * roomCreator.availablePositions.length)];
+    this.player = new Player(rPos.r, rPos.c);
 
     this.enemies = [];
     this.enemyIndex = 0;
@@ -47,10 +49,16 @@ gameManager.prototype.update = function() {
 gameManager.prototype.setStatePlayer = function() {
     this.player.isAvailable = true;
     this.currentState = this.states.player;
+    turnLabel.text = "Your Turn";
 }
 
 gameManager.prototype.setStateEnemy = function() {
-    this.enemyIndex = 0;
-    this.enemies[this.enemyIndex].isAvailable = true;
-    this.currentState = this.states.enemy;
+    if (this.enemies.length > 0) {
+        this.enemyIndex = 0;
+        this.enemies[this.enemyIndex].isAvailable = true;
+        this.currentState = this.states.enemy;
+        turnLabel.text = "Enemy Turn";
+    } else {
+        turnLabel.text = "You Cleared The Stage!";
+    }
 }
