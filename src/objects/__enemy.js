@@ -1,16 +1,31 @@
 let Enemy = function (row, col) {
     MovingUnit.call(this, row, col, "enemy1", def.unit.enemy);
+
     this.frame = 0;
     this.dmg = 10;
+    this.maxhp = 40
     this.hp = 40;
     this.soul = 20;
+
+    this.hpbar = new Phaser.Rectangle(this.x + 5, this.y, CellSize - 10, 10);
 }
 
 Enemy.prototype = Object.create(MovingUnit.prototype);
 Enemy.prototype.constructor = Enemy;
 
+Enemy.prototype.update = function() {
+    if (this.hp > 0) {
+        this.hpbar.x = this.x;
+        this.hpbar.y = this.y;
+    } else {
+        this.hpbar.width = 0;
+    }
+
+    game.debug.geom(this.hpbar,'#b4202a');
+}
+
 Enemy.prototype._update = function(fn) {
-    
+
     if (this.isAvailable) {
 
         let availableDirections = [];
@@ -102,8 +117,10 @@ Enemy.prototype.checkTile = function(row, col) {
 }
 
 Enemy.prototype.damageTaken = function(dmg, index) {
+    game.camera.shake(0.02, 80);
     game.camera.flash(0xffffff, 80);
     this.hp -= dmg;
+    this.hpbar.width = ((CellSize - 10) / this.maxhp) * this.hp;
     console.log(dmg, this.hp, "AAAAAAAAAA");
     if (this.hp < 1) {
         roomCreator.tileMap[this.row][this.col].containsUnit = false;

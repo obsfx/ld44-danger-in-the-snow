@@ -8,7 +8,7 @@ let Player = function (row, col) {
     }
 
     this.soul = 100;
-    this.damage = 20;
+    this.damage = 30;
     
     MovingUnit.call(this, row, col, "player1", def.unit.player);
     this.frame = 0;
@@ -64,6 +64,7 @@ Player.prototype.checkTile = function(key, row, col) {
 }
 
 Player.prototype.damageTaken = function(dmg) {
+    game.camera.shake(0.02, 80);
     game.camera.flash(0xf77474, 80);
     this.soul -= dmg;
     soulLabel.text = `Souls: ${this.soul}`;

@@ -69,7 +69,7 @@ roomGenerator.prototype.generate = function() {
 
 roomGenerator.prototype.decorate = function() {
     this.reCalculateAvailablePositions();
-    let randomFloorDecCount = Math.floor(Math.random() * 6) + 3;
+    let randomFloorDecCount = Math.floor(Math.random() * 6) + 6;
 
     for (let i = 0; i < randomFloorDecCount; i++) {
         let random = this.availablePositions.splice(Math.floor(Math.random() * this.availablePositions.length), 1)[0];
@@ -79,16 +79,25 @@ roomGenerator.prototype.decorate = function() {
 }
 
 roomGenerator.prototype.initBlocks = function() {
-    this.reCalculateAvailablePositions();
-    let randomBlockCount = Math.floor(Math.random() * 4) + 2;
+    let randomBlockCount = Math.floor(Math.random() * 2) + 3;
+    let pos = [];
+
+    for (let i = 2; i < this.tileMap.length - 2; i++) {
+        for (let j = 2; j < this.tileMap[i].length - 2; j++) {
+            if (this.tileMap[i][j].type == this.tileTypes.floorTile && this.tileMap[i][j].containsUnit === false) {
+                pos.push({r: i, c: j});
+            }
+        }
+    }
 
     for (let i = 0; i < randomBlockCount; i++) {
-        let random = this.availablePositions.splice(Math.floor(Math.random() * this.availablePositions.length), 1)[0];
-        console.log(this.tileMap[random.r][random.c]);
-        this.tileMap[random.r][random.c].item.loadTexture(this.blockTiles[Math.floor(Math.random() * this.blockTiles.length)]);
-        this.tileMap[random.r][random.c].type = this.tileTypes.outherTile;
+        if (pos.length > 0) {
+            let random = pos.splice(Math.floor(Math.random() * pos.length), 1)[0];
+            console.log(this.tileMap[random.r][random.c]);
+            this.tileMap[random.r][random.c].item.loadTexture(this.blockTiles[Math.floor(Math.random() * this.blockTiles.length)]);
+            this.tileMap[random.r][random.c].type = this.tileTypes.outherTile;
+        }
     }
-    this.reCalculateAvailablePositions();
 }
 
 roomGenerator.prototype.reCalculateAvailablePositions = function() {
