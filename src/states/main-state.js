@@ -2,7 +2,34 @@ let def = {
     unit: {
         player: 0,
         enemy: 1
-    }
+    },
+    level: 0,
+    player: {
+        upgradeLevel: 0
+    },
+    enemiesInLevels: [
+        [1],
+        [1, 2],
+        [1, 2, 3],
+        [2, 3],
+        [2, 3],
+        [3, 4],
+        [3, 4],
+        [4, 5],
+        [4, 5],
+        [4, 5],
+        [4, 5, 6],
+        [4, 5, 6]
+    ],
+    enemyCounts: [4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7],
+    enemySpec: [
+        {hp: 50, damage: 40, soul: 85},
+        {hp: 75, damage: 60, soul: 115},
+        {hp: 125, damage: 90, soul: 175},
+        {hp: 190, damage: 140, soul: 290},
+        {hp: 260, damage: 210, soul: 420},
+        {hp: 360, damage: 300, soul: 605}
+    ]
 }
 
 let roomCreator;
@@ -25,7 +52,7 @@ let MainState = {
         roomCreator.generate();
 
         _gameManager = new gameManager();
-        _gameManager.generateEnemies(4);
+        _gameManager.generateEnemies(10);
 
         soulLabel = ui.createStageText(`Souls: ${_gameManager.player.soul}`, CellSize / 2, (TotalROW - 2) * CellSize + CellSize / 2 + 20, 24);
         playerDamageLabel = ui.createStageText(`Your Damage: ${_gameManager.player.damage}`, CellSize / 2, (TotalROW - 2) * CellSize + CellSize + 15, 24);
