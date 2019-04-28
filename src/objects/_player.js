@@ -67,7 +67,7 @@ Player.prototype.damageTaken = function(dmg) {
     game.camera.shake(0.02, 80);
     game.camera.flash(0xf77474, 80);
     this.soul -= dmg;
-    soulLabel.text = `Souls: ${this.soul}`;
+    soulLabel.text = `SOULS: ${this.soul}`;
     console.log("dmgtaken", this.soul);
 }
 
@@ -75,5 +75,5 @@ Player.prototype.soulTaken = function(soul) {
     console.log(soul);
     game.camera.flash(0x0000ff, 80);
     this.soul += soul;
-    soulLabel.text = `Souls: ${this.soul}`;
+    soulLabel.text = `SOULS: ${this.soul}`;
 }

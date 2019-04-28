@@ -1,3 +1,4 @@
+let ui = new UI();
 let Preload = {
     preload : function() {
         for (let i in AssetsPath.Preloads) {
@@ -42,6 +43,6 @@ let Preload = {
         this.UI = new UI(Screen.Width, 100);
         this.UI.createStageText(`L O A D I N G`, Screen.Width / 2, Screen.Height / 2);
 
-        this.UI.bgFadeOut(function(){game.state.start("MainState");})
+        this.UI.bgFadeOut(function(){game.state.start("ArenaSelection");})
     }
 }

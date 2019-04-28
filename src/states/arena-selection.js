@@ -1,24 +1,69 @@
+let ASTiles = null;
+let levelTiles = null;
+
+let def = {
+    unit: {
+        player: 0,
+        enemy: 1
+    },
+    level: 0,
+    player: {
+        upgradeLevel: 0
+    },
+    enemiesInLevels: [
+        [0],
+        [0, 1],
+        [0, 1, 2],
+        [1, 2],
+        [1, 2],
+        [2, 3],
+        [2, 3],
+        [3, 4],
+        [3, 4],
+        [3, 4, 5],
+        [4, 5],
+        [4, 5]
+    ],
+    enemyCounts: [4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7],
+    enemySpec: [
+        {hp: 50, damage: 40, soul: 85},
+        {hp: 75, damage: 60, soul: 115},
+        {hp: 125, damage: 90, soul: 175},
+        {hp: 190, damage: 140, soul: 290},
+        {hp: 260, damage: 210, soul: 420},
+        {hp: 360, damage: 300, soul: 605}
+    ]
+}
+
 let ArenaSelection = {
     create: function() {
         
-        this.UI = new UI(Screen.Width, 100);
-        this.UI.bgFadeIn(function(){});
-        
-        this.UI.createArenaGraphics();
-        this.UI.soulsText = this.UI.createStageText(`S O U L S : ${Game.souls}`, Screen.Width / 2, 380);
-        this.UI.sacSoulsText = this.UI.createStageText(`S A C R I F I C E D  S O U L S : ${Game.sacrificedSouls}`, Screen.Width / 2, 405);
+        ui.bgFadeIn(function(){});
 
-        let label = game.add.text(Screen.Width / 2, 440, "Y O U R  S O U L  W I L L  R E C I V E  U P G R A D E S", { font: `14px Slabo`, fill: `#${Number(this.UI.rndColors.l).toString(16)}`});
-        label.x = label.x - label.width / 2;
-        let label2 = game.add.text(Screen.Width / 2, 460, "F O R  E V E R Y  3 0 0  S A C R I F I C E D  S O U L S", { font: `14px Slabo`, fill: `#${Number(this.UI.rndColors.l).toString(16)}`});
-        label2.x = label2.x - label2.width / 2;
+        if (ASTiles == null) {
+            let tiles = [];
 
-        this.UI.soulLevelText = this.UI.createStageText(`S O U L  L E V E L : ${Game.D}`, Screen.Width / 2, 490);
+            for (let i = 0; i < TotalROW; i++) {
+                tiles.push([]);
+                for (let j = 0; j < TotalCOL; j++) {
+                    tiles[i].push(new TileItem(j * CellSize, i * CellSize, `f${Math.floor(Math.random() * floorSpriteCount) + 1}`));
+                }
+            }
 
-        this.UI.stageHeadText = this.UI.createStageText(`S E L E C T  A R E N A`, Screen.Width / 2, 30);
-        this.UI.drawUpgradeMenuButton(Screen.Width / 2, 100);
+            let levels = [];
 
-        Game.arena_music.stop();
-        if (!Game.main_music.isPlaying) Game.main_music.restart("", 0, 0.5, true);
+            for (let i = 1; i < 7; i++) {
+                levels.push(new LevelTile(i * CellSize + CellSize, 3 * CellSize, `s${i}`, i - 1));
+            }
+
+            for (let i = 7; i < 13; i++) {
+                levels.push(new LevelTile((13 - i) * CellSize + CellSize, 4 * CellSize, `s${i}`, i - 1));
+            }
+
+            ASTiles = tiles;
+            levelTiles = levels;
+
+            levelTiles[0].setEnable();
+        }
     }
 }

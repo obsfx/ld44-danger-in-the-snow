@@ -1,5 +1,4 @@
 function gameManager() {
-
     this.states = {
         player: 0,
         enemy: 1
@@ -17,12 +16,13 @@ function gameManager() {
     this.setStatePlayer();
 }
 
-gameManager.prototype.generateEnemies = function(enemyCount) {
+gameManager.prototype.generateEnemies = function() {
     this.enemies = [];
-    for (let i = 0; i < enemyCount; i++) {
+    for (let i = 0; i < def.enemyCounts[def.level]; i++) {
         roomCreator.reCalculateAvailablePositions();
         let randomPos = roomCreator.availablePositions[Math.floor(Math.random() * roomCreator.availablePositions.length)];
-        this.enemies.push(new Enemy(randomPos.r, randomPos.c));
+        let level = def.enemiesInLevels[def.level][Math.floor(Math.random() * def.enemiesInLevels[def.level].length)];
+        this.enemies.push(new Enemy(randomPos.r, randomPos.c, level));
     }
 }
 
@@ -49,7 +49,7 @@ gameManager.prototype.update = function() {
 gameManager.prototype.setStatePlayer = function() {
     this.player.isAvailable = true;
     this.currentState = this.states.player;
-    turnLabel.text = "Your Turn";
+    turnLabel.text = "YOUR TURN";
 }
 
 gameManager.prototype.setStateEnemy = function() {
@@ -57,8 +57,11 @@ gameManager.prototype.setStateEnemy = function() {
         this.enemyIndex = 0;
         this.enemies[this.enemyIndex].isAvailable = true;
         this.currentState = this.states.enemy;
-        turnLabel.text = "Enemy Turn";
+        turnLabel.text = "ENEMY TURN";
     } else {
-        turnLabel.text = "You Cleared The Stage!";
+        def.level++;
+        _gameManager.setStatePlayer();
+        _gameManager.generateEnemies();
+        turnLabel.text = "YOU CLEARED THE STAGE!";
     }
 }

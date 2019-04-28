@@ -37,6 +37,6 @@ UI.prototype.bgFadeOut = function(fn) {
 }
 
 UI.prototype.createStageText = function(text, x, y, size) {
-    let label = game.add.text(x, y, text, { font: `${size}px Indie Flower`, fill: `#252525`});
+    let label = game.add.text(x, y, text, { font: `${size}px I pixel u`, fill: `#252525`});
     return label;
 }

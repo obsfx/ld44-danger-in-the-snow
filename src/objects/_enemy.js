@@ -1,11 +1,11 @@
-let Enemy = function (row, col) {
-    MovingUnit.call(this, row, col, "enemy1", def.unit.enemy);
+let Enemy = function (row, col, level) {
+    MovingUnit.call(this, row, col, `enemy${level}`, def.unit.enemy);
 
     this.frame = 0;
-    this.dmg = 10;
-    this.maxhp = 40
-    this.hp = 40;
-    this.soul = 20;
+    this.dmg = def.enemySpec[level].damage;
+    this.maxhp = def.enemySpec[level].hp;
+    this.hp = def.enemySpec[level].hp;
+    this.soul = def.enemySpec[level].soul;
 
     this.hpbar = new Phaser.Rectangle(this.x + 5, this.y, CellSize - 10, 10);
 }
