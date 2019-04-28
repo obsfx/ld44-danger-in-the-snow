@@ -1,5 +1,4 @@
 let Player = function (row, col) {
-    this.type = def.unit.player;
     this.controls = {
         up: Phaser.Keyboard.W,
         down: Phaser.Keyboard.S,
@@ -10,7 +9,7 @@ let Player = function (row, col) {
 
     this.soul = 50;
     
-    MovingUnit.call(this, row, col, "player1");
+    MovingUnit.call(this, row, col, "player1", def.unit.player);
     this.frame = 0;
 }
 
@@ -33,26 +32,11 @@ Player.prototype._update = function(fn) {
                 if (checkTile.type == "free") {
                     this.setPos(dirs[i].row, dirs[i].col, fn);
                     break;
+                } else if (checkTile.type == "enemy") {
+                    this.attack(dirs[i], fn);
                 }
             }
         }
-
-        /*if (this.checkTile(this.controls.up, dirs[0].row, dirs[0].col).isAvailable) {
-            if (this.checkTile(this.controls.up, dirs[0].row, dirs[0].col).type == "free") {
-                this.checkTile(this.controls.up, dirs[0].row, dirs[0].col).isAvailable
-            }
-            
-        } else if (this.checkTile(this.controls.down, dirs[1].row, dirs[1].col).isAvailable) {
-            if (this.checkTile(this.controls.down, dirs[1].row, dirs[1].col).type == "free") {
-                this.setPos(dirs[1].row, dirs[1].col, fn);
-            }
-                
-        } else if (this.checkTile(this.controls.left, dirs[2].row, dirs[2].col).isAvailable) {
-            if (this.checkTile(this.controls.left, dirs[2].row, dirs[2].col).type == "free")
-            this.setPos(dirs[2].row, dirs[2].col, fn);
-        } else if (this.checkTile(this.controls.right, dirs[3].row, dirs[3].col).isAvailable) {
-            this.setPos(dirs[3].row, dirs[3].col, fn);
-        }*/
     }
 }
 
@@ -61,7 +45,7 @@ Player.prototype.checkTile = function(key, row, col) {
     if (game.input.keyboard.isDown(key) && tile.type === roomCreator.tileTypes.floorTile) {
         if (tile.containsUnit === false) {
             return {isAvailable: true, type: "free"}
-        } else if (tile.containsUnit !== 0) {
+        } else if (tile.containsUnit !== def.unit.player) {
             return {isAvailable: true, type: "enemy"}
         } else {
             return {isAvailable: false}
