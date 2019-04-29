@@ -35,7 +35,7 @@ Player.prototype._update = function(fn) {
                     for (let j = 0; j < _gameManager.enemies.length; j++) {
                         let enemy = _gameManager.enemies[j];
                         if (enemy.row === dirs[i].row && enemy.col === dirs[i].col) {
-                            console.log(this.__damage, "AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                            Game.hit.restart("", 0, 0.5, false);
                             enemy.damageTaken(this.__damage, j);
                         }
                     }
@@ -66,7 +66,7 @@ Player.prototype.damageTaken = function(takenDamage) {
     game.camera.flash(0xf77474, 80);
     def.playerSoul -= takenDamage;
     soulLabel.text = `SOULS: ${def.playerSoul}`;
-
+    Game.hurt.restart("", 0, 0.5, false);
     if (def.playerSoul < 1) {
         this.kill();
         ui.bgFadeOut(function(){game.state.start("GameOver");})

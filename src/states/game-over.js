@@ -1,6 +1,7 @@
 let GameOver = {
     create: function() {
         ui.bgFadeIn(function(){});
+        Game.main_music.stop();
         let tiles = [];
 
         for (let i = 0; i < TotalROW; i++) {

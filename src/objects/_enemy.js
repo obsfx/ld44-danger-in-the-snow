@@ -61,6 +61,7 @@ Enemy.prototype._update = function(fn) {
             
             if (choice == "move") this.setPos(shortestWay.row, shortestWay.col, fn);
             else {
+                Game.hit.restart("", 0, 0.5, false);
                 _gameManager.player.damageTaken(this.__damage);
                 this.attack(attackDir, fn);
             }
@@ -120,9 +121,9 @@ Enemy.prototype.damageTaken = function(takenDamage, index) {
     game.camera.flash(0xffffff, 80);
     this.hp -= takenDamage;
     this.hpbar.width = ((CellSize - 10) / this.maxhp) * this.hp;
+    Game.hurt.restart("", 0, 0.5, false);
     if (this.hp < 1) {
         roomCreator.tileMap[this.row][this.col].containsUnit = false;
-        console.log(this.soul, "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
         _gameManager.player.soulTaken(this.soul);
         this.kill();
         _gameManager.enemies.splice(index, 1);

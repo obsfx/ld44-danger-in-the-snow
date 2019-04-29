@@ -67,19 +67,11 @@ let Preload = {
             upgradesDone: false
         };
 
-        /*Game.main_music = game.add.audio('main');
-        Game.arena_music = game.add.audio('arena');
-
+        Game.main_music = game.add.audio('bgsong');
         Game.main_music.volume = 0.5;
-        Game.arena_music.volume = 0.1;
-
         Game.main_music.restart("", 0, 0.5, true);
-
-        Game.collect = game.add.audio('collect');
-        Game.takedmg = game.add.audio('takedmg');
-        Game.enemydestroy = game.add.audio('enemydestroy');
-        Game.enemytake = game.add.audio('enemytake');
-        Game.fire = game.add.audio('fire'); ArenaSelection **/
+        Game.hurt = game.add.audio('hurt');
+        Game.hit = game.add.audio('hit');
 
         
 

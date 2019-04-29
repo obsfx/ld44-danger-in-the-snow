@@ -66,6 +66,8 @@ let ArenaSelection = {
                     upgradeLabel.text = `WEAPON UPGRADE LEVEL: ${def.playerUpgradeLevel + 1}`;
                     damageLabel.text = `DAMAGE: ${25 * def.playerUpgrades[def.playerUpgradeLevel]}`;
 
+                    Game.hit.restart("", 0, 0.5, false);
+
                     if (def.playerUpgradeLevel < def.playerPriceList.length) {
                         nextUpgradeLabel.text = `NEXT UPGRADE: ${def.playerPriceList[def.playerUpgradeLevel]} SOULS`;
                     } else {

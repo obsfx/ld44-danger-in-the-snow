@@ -26,9 +26,9 @@ const AssetsPath = {
         {type: "spritesheet", key: "enemy3", path: `${AssetsDir}/units/e3.png`, w: 64, h: 64, f: 2},
         {type: "spritesheet", key: "enemy4", path: `${AssetsDir}/units/e4.png`, w: 64, h: 64, f: 2},
         {type: "spritesheet", key: "enemy5", path: `${AssetsDir}/units/e5.png`, w: 64, h: 64, f: 2},
-        {type: "audio", key: "enemydestroy", path: `${AssetsDir}/enemydestroy.wav`},
-        {type: "audio", key: "enemytake", path: `${AssetsDir}/enemytake.wav`},
-        {type: "audio", key: "fire", path: `${AssetsDir}/fire.wav`}
+        {type: "audio", key: "bgsong", path: `${AssetsDir}/sound/bgsong.mp3`},
+        {type: "audio", key: "hurt", path: `${AssetsDir}/sound/hurt.wav`},
+        {type: "audio", key: "hit", path: `${AssetsDir}/sound/damage.wav`}
     ]
 }
 
@@ -128,16 +128,7 @@ const EnemySpecs = [
 ]
 
 let Game = {
-    souls: 400,
-    baseSouls: 200,
-    baseSacrifice: 100,
-    sacrificedSouls: 0,
-    uCount: 0,
-    currentArena: 0,
-    activeArena: 0,
-    arenaStatus: [true, false, false, false],
-    arenaReq: [0, 666, 4366, 6666],
-    D: 1,
     main_music: null,
-    arena_music: null,
+    hit: null,
+    hurt: null
 }

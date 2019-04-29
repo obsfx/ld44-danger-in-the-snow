@@ -11,8 +11,8 @@ function UI() {
 UI.prototype.createFadeBG = function() {
     let stageFadeBG = game.add.graphics(0, 0);
     stageFadeBG.fixedToCamera = true;
-    stageFadeBG.beginFill(0x000000, 1);
-    stageFadeBG.lineStyle(0, 0x0000FF, 1);
+    stageFadeBG.beginFill(0xf8f8f8, 1);
+    stageFadeBG.lineStyle(0, 0xf8f8f8, 1);
     stageFadeBG.drawRect(0, 0, Screen.Width, Screen.Height);
 
     return stageFadeBG;

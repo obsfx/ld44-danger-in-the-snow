@@ -2,7 +2,8 @@ let Win = {
     create: function() {
         ui.bgFadeIn(function(){});
         let tiles = [];
-
+        Game.main_music.stop();
+        
         for (let i = 0; i < TotalROW; i++) {
             tiles.push([]);
             for (let j = 0; j < TotalCOL; j++) {
