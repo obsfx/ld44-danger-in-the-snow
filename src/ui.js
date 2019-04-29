@@ -21,7 +21,7 @@ UI.prototype.createFadeBG = function() {
 UI.prototype.bgFadeIn = function(fn) {
     let bg = this.createFadeBG();
     bg.alpha = 1;
-    let tween = game.add.tween(bg).to( { alpha: 0 }, 400, "Linear", true);
+    let tween = game.add.tween(bg).to( { alpha: 0 }, 100, "Linear", true);
     tween.onComplete.add(function() {
         fn();
     }, this);
@@ -30,7 +30,7 @@ UI.prototype.bgFadeIn = function(fn) {
 UI.prototype.bgFadeOut = function(fn) {
     let bg = this.createFadeBG();
     bg.alpha = 0;
-    let tween = game.add.tween(bg).to( { alpha: 1 }, 400, "Linear", true);
+    let tween = game.add.tween(bg).to( { alpha: 1 }, 100, "Linear", true);
     tween.onComplete.add(function() {
         fn();
     }, this);
@@ -38,5 +38,6 @@ UI.prototype.bgFadeOut = function(fn) {
 
 UI.prototype.createStageText = function(text, x, y, size) {
     let label = game.add.text(x, y, text, { font: `${size}px I pixel u`, fill: `#252525`});
+    label.x = x - label.width / 2;
     return label;
 }

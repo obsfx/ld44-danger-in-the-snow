@@ -9,17 +9,17 @@ let MainState = {
     
     create: function() {
         game.stage.backgroundColor = "#F8F8F8";
-
-        turnLabel = ui.createStageText(`Your Turn`, CellSize / 2, (TotalROW - 2) * CellSize, 36);
+        turnLabel = ui.createStageText(`YOUR TURN`, TotalCOL / 2 * CellSize, (TotalROW - 2) * CellSize, 36);
 
         roomCreator = new roomGenerator(TotalROW - 2, TotalCOL - Math.floor(Math.random() * 4));
         roomCreator.generate();
-
         _gameManager = new gameManager();
         _gameManager.generateEnemies();
 
-        soulLabel = ui.createStageText(`SOULS: ${_gameManager.player.soul}`, CellSize / 2, (TotalROW - 2) * CellSize + CellSize / 2 + 20, 24);
-        playerDamageLabel = ui.createStageText(`YOUR DAMAGE: ${_gameManager.player.damage}`, CellSize / 2, (TotalROW - 2) * CellSize + CellSize + 15, 24);
+        soulLabel = ui.createStageText(`SOULS: ${def.playerSoul}`, TotalCOL / 2 * CellSize, (TotalROW - 2) * CellSize + CellSize / 2 + 20, 24);
+        playerDamageLabel = ui.createStageText(`YOUR DAMAGE: ${_gameManager.player.__damage}`, TotalCOL / 2 * CellSize, (TotalROW - 2) * CellSize + CellSize + 15, 24);
+
+        ui.bgFadeIn(function(){});
     },
 
     update: function() {

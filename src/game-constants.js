@@ -76,7 +76,7 @@ for (let i = 1; i < weaponSpriteCount + 1; i++) {
     AssetsPath.Preloads.push({
         type: "image", 
         key: `w${i}`,
-        path: `${AssetsDir}/upgrades/w${i}.png`
+        path: `${AssetsDir}/upgrades/u${i}.png`
     });
 }
 

@@ -60,8 +60,10 @@ gameManager.prototype.setStateEnemy = function() {
         turnLabel.text = "ENEMY TURN";
     } else {
         def.level++;
-        _gameManager.setStatePlayer();
-        _gameManager.generateEnemies();
-        turnLabel.text = "YOU CLEARED THE STAGE!";
+        if (def.level == 12) {
+            ui.bgFadeOut(function(){game.state.start("Win");})
+        } else {
+            ui.bgFadeOut(function(){game.state.start("ArenaSelection");})
+        }
     }
 }
