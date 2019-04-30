@@ -1,5 +1,5 @@
 # Danger In The Snow
-#### April 26th-29th - Ludum Dare 44 
+#### April 26th-29th 2019 - Ludum Dare 44 
 
 ![cover](https://static.jam.vg/raw/39b/71/z/2191c.jpg)
 ![menu](https://static.jam.vg/raw/39b/71/z/2191e.jpg)
