@@ -7,6 +7,6 @@
 
 This game was created in 48 hours with [PhaserV2](https://phaser.io/)
 
-[Play On Your Browser](https://obsfx.github.io/ld44/)
+[Play On Your Browser](https://obsfx.github.io/games/jams/ld44_dangerinthesnow/)
 
 [LDJAM Submission Page](https://ldjam.com/events/ludum-dare/44/danger-in-the-snow)
